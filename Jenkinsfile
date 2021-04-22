@@ -13,7 +13,7 @@ pipeline {
 		stage ('build') {
 			steps {
 				echo "building"
-			    sh 'cd maciej-module && ls && mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}'
+			    sh 'cd maciej-module && ls && mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.nextIncrementalVersion}'
 			}
 		}
 		stage ('test') {
