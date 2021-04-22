@@ -14,6 +14,7 @@ pipeline {
 			steps {
 				echo "building"
 			    sh 'cd maciej-module'
+			    sh 'ls'
 			    sh 'mvn versions:set -DnewVersion=1.0.3-eluwina'
 			}
 		}
