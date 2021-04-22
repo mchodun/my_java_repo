@@ -9,7 +9,9 @@ pipeline {
 		stage ('build') {
 			steps {
 				echo "building"
-			    ls
+			    sh '''#!/bin/bash
+                                 ls
+                         '''
 			}
 		}
 		stage ('test') {
