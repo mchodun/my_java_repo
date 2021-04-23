@@ -14,6 +14,11 @@ pipeline {
 			steps {
 				echo "building"
 			    sh 'cd maciej-module && ls && mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.nextIncrementalVersion}'
+			    withCredentials([usernamePassword(credentialsId: 'mchodun_github',
+                                 usernameVariable: 'username',
+                                 passwordVariable: 'password')]){
+                    sh "echo ${username}, ${password}"
+                }
 			}
 		}
 		stage ('test') {
