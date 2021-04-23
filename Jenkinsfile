@@ -14,9 +14,9 @@ pipeline {
 			steps {
 				script {
 				    currentVersion = sh(script: "mvn -q -Dexec.executable=echo -Dexec.args='${project.version}'  --non-recursive exec:exec", returnStdout: true)
+				    echo "${currentVersion}"
 				}
 				echo "building"
-				echo "${currentVersion}"
 			    sh 'cd maciej-module && ls && mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.nextIncrementalVersion}'
 			    sh 'git commit -m "version updated"'
 			    withCredentials([usernamePassword(credentialsId: 'mchodun_github',
