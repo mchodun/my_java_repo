@@ -13,11 +13,11 @@ pipeline {
 		stage ('build') {
 			steps {
 				script {
-				    currentVersion = sh(script: "mvn -q -Dexec.executable=echo -Dexec.args='${project.version}'  --non-recursive exec:exec", returnStdout: true)
+				    currentVersion = sh(script: "cd maciej-module && mvn -q -Dexec.executable=echo -Dexec.args='${project.version}'  --non-recursive exec:exec", returnStdout: true)
 				    echo "${currentVersion}"
 				}
 				echo "building"
-			    sh 'cd maciej-module && ls && mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.nextIncrementalVersion}'
+			    sh 'cd maciej-module && mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.nextIncrementalVersion}'
 			    sh 'git commit -m "version updated"'
 			    withCredentials([usernamePassword(credentialsId: 'mchodun_github',
                                  usernameVariable: 'username',
